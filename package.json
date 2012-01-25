@@ -1,0 +1,53 @@
+{
+  "name": "photoswipe",
+  "fullName": "PhotoSwipe",
+  "description": "A fullscreen, multi-device simple photo gallery based on http://photoswipe.com/",
+  "version": "3.0.4",
+  "keywords": [
+    "photo",
+    "gallery",
+    "slideshow",
+    "image"
+  ],
+  "joshfire": {
+    "datasources": {
+      "images": {
+        "title": "Photo albums",
+        "multiple": true
+      }
+    },
+    "devices": [
+      {
+        "devices": "*",
+        "startfile": "index.html"
+      }
+    ],
+    "options": {
+      "schema": {
+        "allowUserZoom": {
+          "type": "boolean",
+          "title": "Allow User Zoom",
+          "default": true
+        },
+        "autoStartSlideshow": {
+          "type": "boolean",
+          "title": "Autostart Slideshow",
+          "default": false
+        },
+        "imageScaleMethod":{
+          "type": "string",
+          "title": "Image Scale Method",
+          "enum":["fit","fitNoUpscale","zoom"],
+          "default":"fit",
+          "description": "'fit' ensures the image always fits the screen. 'fitNoUpscale' works like 'fit' but will never upscale the image. 'zoom' the image will always fill the full screen, this may cause the image to be zoomed in and cropped"
+        }
+      },
+      "form": [
+        "datasource.images",
+        "allowUserZoom",
+        "autoStartSlideshow",
+        "imageScaleMethod"
+      ]
+    }
+  }
+}

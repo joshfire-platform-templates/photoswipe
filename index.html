@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PhotoSwipe</title>
+	<meta name="author" content="Ste Brennan - Code Computerlove - http://www.codecomputerlove.com/" />
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	
+	<link href="http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.css" rel="stylesheet" />
+	<link href="jquery-mobile.css" type="text/css" rel="stylesheet" />
+	<link href="photoswipe.css" type="text/css" rel="stylesheet" />
+
+	
+	<script data-joshfire-bootstrap src="http://localhost:40021/bootstrap/4f1ee09c925b6afbba000039/4f1970def3fd44a653000174/phone/"></script>
+	
+	<script type="text/javascript" src="klass.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.js"></script>
+	<script type="text/javascript" src="code.photoswipe.jquery-3.0.4.min.js"></script>
+	
+
+	<script type="text/javascript">
+		
+		(function(window, $, PhotoSwipe){
+		
+		
+			$('#home')
+				.live('pageinit', function(e){
+
+					var imagesources = Joshfire.factory.getDataSource("main").children;
+
+					for (var i=0;i<imagesources.length;i++) {
+						var imgs = imagesources[i];
+						$("#home-list").append('<li><a href="#gallery?ds='+i+'">' + imgs.name + '</a></li>');
+					}
+					$("#home-list").listview("refresh");
+
+				});
+
+			// 
+
+			$('div.gallery-page')
+				.live('pageshow', function(e){
+
+					var currentPage = $(e.target);
+					var options = {
+						"allowUserZoom":Joshfire.factory.config.template.options.allowUserZoom,
+						"autoStartSlideshow":Joshfire.factory.config.template.options.autoStartSlideshow,
+						"imageScaleMethod":Joshfire.factory.config.template.options.imageScaleMethod
+					};
+
+					var m = window.location.toString().match(/ds\=([0-9]+)/);
+					if (!m) return;
+
+					$.mobile.showPageLoadingMsg();
+					
+					$("ul",currentPage).html("");
+
+					var ds = Joshfire.factory.getDataSource("main").children[m[1]];
+
+
+					ds.find({},function(err,data) {
+						var cnt = "";
+						for (var i=0;i<data.entries.length;i++) {
+							cnt+='<li><a href="'+data.entries[i].image.contentURL+'" rel="external"><img src="'+data.entries[i].image.contentURL+'" alt="'+data.entries[i].name+'" /></a></li>'
+						}
+						$("ul",currentPage).append(cnt);
+
+						var photoSwipeInstance = $("ul.gallery a", e.target).photoSwipe(options,  currentPage.attr('id'));
+
+						$.mobile.hidePageLoadingMsg();
+					});
+
+					
+						
+					return true;
+					
+				})
+				
+				.live('pagehide', function(e){
+					
+					var 
+						currentPage = $(e.target),
+						photoSwipeInstance = PhotoSwipe.getInstance(currentPage.attr('id'));
+
+					$("ul",currentPage).html("");
+
+					if (typeof photoSwipeInstance != "undefined" && photoSwipeInstance != null) {
+						PhotoSwipe.detatch(photoSwipeInstance);
+					}
+					
+					return true;
+					
+				});
+		
+			$(document).ready(function(){
+				
+				$("h1").html(Joshfire.factory.config.app.name);
+
+			});
+		
+		}(window, window.jQuery, window.Code.PhotoSwipe));
+		
+	</script>
+	
+</head>
+<body>
+
+<div data-role="page" id="home">
+
+	<div data-role="header">
+		<h1></h1>
+	</div>
+	
+	
+	<div data-role="content" >	
+		
+		<!-- todo config?
+		<p>These examples show PhotoSwipe integrated with jQuery Mobile:</p>		
+		-->
+
+		<ul id="home-list" data-role="listview" data-inset="true">
+		</ul> 
+		
+	</div>
+
+	<!-- todo
+	<div data-role="footer">
+		<h4>&copy; 2011 Code Computerlove</h4>
+	</div>
+	-->
+
+</div>
+
+<div data-role="page" data-add-back-btn="true" id="gallery" class="gallery-page">
+
+	<div data-role="header">
+		<h1></h1>
+	</div>
+
+	<div data-role="content">	
+		
+		<ul class="gallery">
+			
+		</ul>
+		
+	</div>
+
+	
+</div>
+
+
+</body>
+</html>
