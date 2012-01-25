@@ -44,8 +44,18 @@
       },
       "form": [
         "datasources.images",
-        "allowUserZoom",
-        "autoStartSlideshow",
+        {
+          "key":"allowUserZoom",
+          "inlinetitle":"Exclude retweets",
+          "type":"checkbox",
+          "notitle":true
+        },
+        {
+          "key":"autoStartSlideshow",
+          "inlinetitle":"Autostart Slideshow",
+          "type":"checkbox",
+          "notitle":true
+        },
         "imageScaleMethod"
       ]
     }

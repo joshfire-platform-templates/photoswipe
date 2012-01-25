@@ -11,7 +11,7 @@
 	<link href="photoswipe.css" type="text/css" rel="stylesheet" />
 
 	
-	<script data-joshfire-bootstrap src="http://localhost:40021/bootstrap/4f1ee09c925b6afbba000039/4f1970def3fd44a653000174/phone/"></script>
+	<script data-joshfire-bootstrap src="http://localhost:40021/bootstrap/4f1ee09c925b6afbba000039/auto/phone/"></script>
 	
 	<script type="text/javascript" src="klass.min.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
@@ -23,6 +23,7 @@
 		
 		(function(window, $, PhotoSwipe){
 		
+			// $.mobile.page.prototype.options.domCache = false;
 		
 			$('#home')
 				.live('pageinit', function(e){
@@ -31,11 +32,16 @@
 
 					for (var i=0;i<imagesources.length;i++) {
 						var imgs = imagesources[i];
-						$("#home-list").append('<li><a href="#gallery?ds='+i+'">' + imgs.name + '</a></li>');
+						$("#home-list").append('<li><a data-galleryid="'+i+'" href="javascript:void(0);">' + imgs.name + '</a></li>');
 					}
 					$("#home-list").listview("refresh");
 
-				});
+				})
+			$("#home-list a").live("click",function(e) {
+				var gid = $(e.target).data("galleryid");
+				$('div.gallery-page').data("galleryid",gid);
+				$.mobile.changePage("#gallery");
+			});
 
 			// 
 
@@ -49,19 +55,22 @@
 						"imageScaleMethod":Joshfire.factory.config.template.options.imageScaleMethod
 					};
 
-					var m = window.location.toString().match(/ds\=([0-9]+)/);
-					if (!m) return;
-
+					var gid = parseInt($('div.gallery-page').data("galleryid"),10);
+					if (isNaN(gid)) {
+						return $.mobile.changePage("");
+					}
 					$.mobile.showPageLoadingMsg();
 					
 					$("ul",currentPage).html("");
 
-					var ds = Joshfire.factory.getDataSource("images").children[m[1]];
+					var ds = Joshfire.factory.getDataSource("images").children[gid];
 
+					$("h1",currentPage).html(ds.name);
 
 					ds.find({},function(err,data) {
 						var cnt = "";
 						for (var i=0;i<data.entries.length;i++) {
+							if (!data.entries[i].image) continue;
 							cnt+='<li><a href="'+data.entries[i].image.contentURL+'" rel="external"><img src="'+data.entries[i].image.contentURL+'" alt="'+data.entries[i].name+'" /></a></li>'
 						}
 						$("ul",currentPage).append(cnt);
@@ -88,6 +97,8 @@
 					if (typeof photoSwipeInstance != "undefined" && photoSwipeInstance != null) {
 						PhotoSwipe.detatch(photoSwipeInstance);
 					}
+
+					$("h1",currentPage).html("");
 					
 					return true;
 					
@@ -95,7 +106,7 @@
 		
 			$(document).ready(function(){
 				
-				$("h1").html(Joshfire.factory.config.app.name);
+				$("#home h1").html(Joshfire.factory.config.app.name);
 
 			});
 		
