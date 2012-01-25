@@ -2,7 +2,7 @@
   "name": "photoswipe",
   "fullName": "PhotoSwipe",
   "description": "A fullscreen, multi-device simple photo gallery based on http://photoswipe.com/",
-  "version": "3.0.4",
+  "version": "3.0.4.1",
   "keywords": [
     "photo",
     "gallery",
@@ -43,7 +43,7 @@
         }
       },
       "form": [
-        "datasource.images",
+        "datasources.images",
         "allowUserZoom",
         "autoStartSlideshow",
         "imageScaleMethod"
