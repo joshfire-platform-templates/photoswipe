@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>PhotoSwipe</title>
+	<title></title>
 	<meta name="author" content="Ste Brennan - Code Computerlove - http://www.codecomputerlove.com/" />
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -105,9 +105,15 @@
 				});
 		
 			$(document).ready(function(){
+				var icon = Joshfire.factory.config.app.icon;
 				
 				$("#home h1").html(Joshfire.factory.config.app.name);
 
+				if (icon && icon.contentURL) {
+					$("head").append('<link rel="apple-touch-icon-precomposed" href="' +
+						icon.contentURL +
+						'" />');
+				}
 			});
 		
 		}(window, window.jQuery, window.Code.PhotoSwipe));
