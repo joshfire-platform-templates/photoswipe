@@ -59,6 +59,94 @@
         },
         "imageScaleMethod"
       ]
-    }
+    },
+
+    "libraries": [
+      {
+        "name": "Klass",
+        "homepage": "https://github.com/ded/klass",
+        "description": "An expressive, cross platform JavaScript Class provider with a classical interface to prototypal inheritance.",
+        "repositories": [
+          {
+            "type": "git",
+            "url": "https://github.com/ded/klass.git"
+          }
+        ],
+        "licenses": [
+          {
+            "type": "MIT",
+            "url": "license-klass.txt"
+          }
+        ]
+      },
+      {
+        "name": "jQuery",
+        "homepage": "http://jquery.com/",
+        "description": "jQuery is a fast and concise JavaScript Library that simplifies HTML document traversing, event handling, animating, and Ajax interactions for rapid web development.",
+        "repositories": [
+          {
+            "type": "git",
+            "url": "https://github.com/jquery/jquery.git"
+          }
+        ],
+        "licenses": [
+          {
+            "type": "MIT",
+            "url": "license-jquery.txt"
+          }
+        ]
+      },
+      {
+        "name": "jQuery Mobile",
+        "homepage": "http://jquerymobile.com/",
+        "description": "A unified, HTML5-based user interface system for all popular mobile device platforms, built on the rock-solid jQuery and jQuery UI foundation. Its lightweight code is built with progressive enhancement, and has a flexible, easily themeable design.",
+        "repositories": [
+          {
+            "type": "git",
+            "url": "https://github.com/jquery/jquery-mobile.git"
+          }
+        ],
+        "licenses": [
+          {
+            "type": "MIT",
+            "url": "license-jquerymobile.txt"
+          }
+        ]
+      },
+      {
+        "name": "Photoswipe",
+        "homepage": "http://www.photoswipe.com/",
+        "description": "Inspired by the iOS photo viewer and Google images for mobile, PhotoSwipe is a HTML/CSS/JavaScript based image gallery specifically targeting mobile devices.",
+        "repositories": [
+          {
+            "type": "git",
+            "url": "https://github.com/codecomputerlove/PhotoSwipe.git"
+          }
+        ],
+        "licenses": [
+          {
+            "type": "MIT",
+            "url": "license-photoswipe.txt"
+          }
+        ]
+      },
+      {
+        "name": "Sizzle",
+        "homepage": "http://sizzlejs.com/",
+        "description": "A pure-JavaScript CSS selector engine designed to be easily dropped in to a host library.",
+        "repositories": [
+          {
+            "type": "git",
+            "url": "https://github.com/jquery/sizzle.git"
+          }
+        ],
+        "licenses": [
+          {
+            "type": "MIT",
+            "url": "license-sizzle.txt"
+          }
+        ]
+      },
+    ]
   }
 }
